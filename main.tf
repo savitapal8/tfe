@@ -1,18 +1,51 @@
-variable "url" {
-    type = string
-    description = "(optional) describe your variable"
-    default = "https://api.github.com/users"
+provider "google" {
+  user_project_override = true
+  access_token          = var.access_token
+}
+resource "google_service_account" "default" {
+  account_id   = "service-account-id"
+  display_name = "Service Account"
 }
 
-data "http" "example" {
-  url = var.url
+resource "google_compute_instance" "default" {
+  name         = "test"
+  machine_type = "e2-medium"
+  zone         = "us-central1-a"
 
-  # Optional request headers
-  request_headers = {
-    Accept = "application/json"
+  tags = ["foo", "bar"]
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+    }
   }
-}
 
-output "body" {
-    value = data.http.example.body
+  // Local SSD disk
+  scratch_disk {
+    interface = "SCSI"
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {
+      // Ephemeral public IP
+    }
+  }
+
+  metadata = {
+    foo = "bar"
+  }
+
+  labels = {
+    "key" = "value"
+  }
+
+  metadata_startup_script = "echo hi > /test.txt"
+
+  service_account {
+    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+    email  = google_service_account.default.email
+    scopes = ["cloud-platform"]
+  }
 }
