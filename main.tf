@@ -9,7 +9,7 @@ resource "google_service_account" "default" {
 
 resource "google_compute_instance" "default" {
   name         = "test"
-  machine_type = "e2-medium"
+  machine_type = "n1-standard-4"
   zone         = "us-central1-a"
 
   tags = ["foo", "bar"]
