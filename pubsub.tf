@@ -19,3 +19,11 @@ resource "google_pubsub_topic" "example" {
     created = "YYYYMMDD"
   }
 }
+
+resource "google_pubsub_topic" "example1" {
+  name = "example-topic-no-labels"
+
+  message_storage_policy { 
+    allowed_persistence_regions = ["us-central1","us-central2"]
+  }
+}
