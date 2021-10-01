@@ -2,8 +2,19 @@ resource "google_dataproc_cluster" "mycluster" {
   name     = "mycluster"
   region   = "us-central1"
   graceful_decommission_timeout = "120s"
+
   labels = {
-    foo = "bar"
+    gcp_region = "US"
+    owner = "hybridenv"
+    application_division = "pci"
+    application_name = "demo"
+    application_role = "app"
+    environment = "dev"
+    au = "0223092"
+    data_confidentiality = "pub"
+    data_compliance = "pci"
+    data_type = "test"
+    created = "YYYYMMDD"
   }
 
   cluster_config {
