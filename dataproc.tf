@@ -1,4 +1,5 @@
 resource "google_dataproc_cluster" "mycluster" {
+  provider = google-beta
   name     = "mycluster"
   region   = "us-central1"
   graceful_decommission_timeout = "120s"
@@ -65,5 +66,10 @@ resource "google_dataproc_cluster" "mycluster" {
       script      = "gs://dataproc-initialization-actions/stackdriver/stackdriver.sh"
       timeout_sec = 500
     }
+
+    endpoint_config {
+      enable_http_port_access = "true"
+    }
+
   }
 }
