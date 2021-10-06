@@ -55,7 +55,7 @@ resource "google_dataproc_cluster" "mycluster_kkms" {
     gce_cluster_config {
       tags = ["foo", "bar"]
       # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-      service_account = google_service_account.default.email
+      # service_account = google_service_account.default.email
       service_account_scopes = [
         "cloud-platform"
       ]
@@ -135,7 +135,7 @@ resource "google_dataproc_cluster" "mycluster_ukms" {
     gce_cluster_config {
       tags = ["foo", "bar"]
       # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-      service_account = google_service_account.default.email
+      service_account = "somesa@saome.com"
       service_account_scopes = [
         "cloud-platform"
       ]
