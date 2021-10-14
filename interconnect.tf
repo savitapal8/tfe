@@ -1,7 +1,7 @@
 resource "google_compute_router" "foobar" {
   name    = "router"
   project = var.project_id
-  #region  = "us-central1"
+  region  = var.region
   network = google_compute_network.vpc_network.name
   bgp {
     asn = 16550
@@ -16,7 +16,8 @@ resource "google_compute_network" "vpc_network" {
 
 resource "google_compute_interconnect_attachment" "on_prem" {
   name                     = "on-prem-attachment"
-  project                  = var.project_id
+  project                  = var.project_id 
+  region                   = var.region
   edge_availability_domain = "AVAILABILITY_DOMAIN_1"
   type                     = "PARTNER"
   router                   = google_compute_router.foobar.id
