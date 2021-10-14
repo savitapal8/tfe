@@ -2,7 +2,7 @@ resource "google_compute_router" "foobar" {
   name    = "router"
   project = var.project_id
   #region  = "us-central1"
-  network = google_compute_network.foobar.name
+  network = google_compute_network.vpc_network.name
   bgp {
     asn = 16550
   }
