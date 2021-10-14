@@ -1,7 +1,3 @@
-provider "google"{
-    region = var.region
-}
-
 resource "google_compute_router" "foobar" {
   name    = "router"
   project = var.project_id
